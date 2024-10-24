@@ -2,6 +2,7 @@ name: CI
 env:
   VERCEL_PROJECT_ID: ${{ secrets.PROJECT_ID }}
   VERCEL_ORG_ID: ${{ secrets.ORG_ID }}
+
 on:
   pull_request:
     types: [labeled, synchronize, edited]
@@ -33,10 +34,8 @@ jobs:
           node-version: "18.19.1"
       - name: Install Dependencies
         run: yarn install --frozen-lockfile
-        shell: bash
       - name: Install Vercel CLI
         run: npm install --global vercel@latest
-        shell: bash
       - name: Setup Canvas
         run: npm rebuild canvas
       - name: Run test
@@ -56,26 +55,25 @@ jobs:
           node-version: "18.19.1"
       - name: Install Dependencies
         run: yarn install --frozen-lockfile
-        shell: bash
       - name: Install Vercel CLI
         run: npm install --global vercel@latest
-        shell: bash
       - name: Pull Vercel Environment Information
-        run: npx dotenv -v VERCEL_ORG_ID=${{ secrets.VERCEL_ORG_ID }} -v VERCEL_PROJECT_ID=${{ secrets.VERCEL_PROJECT_ID }} -- vercel pull --yes --environment=preview --token=${{ secrets.VERCEL_TOKEN }}
-        shell: bash
+        run: vercel pull --yes --environment=preview --token=${{ secrets.VERCEL_TOKEN }}
+        env:
+          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
       - name: Build Project Artifacts
         run: vercel build --token=${{ secrets.VERCEL_TOKEN }}
-        shell: bash
       - name: Deploy Project Artifacts to Vercel
         id: preview-deployment
-        run: echo "GITHUB_PREVIEW_URL=$(npx dotenv -v VERCEL_ORG_ID=${{ secrets.VERCEL_ORG_ID }} -v VERCEL_PROJECT_ID=${{ secrets.VERCEL_PROJECT_ID }} -- vercel --prebuilt --token=${{ secrets.VERCEL_TOKEN }})" >> $GITHUB_ENV
-        shell: bash
+        run: |
+          GITHUB_PREVIEW_URL=$(vercel --prebuilt --token=${{ secrets.VERCEL_TOKEN }})
+          echo "GITHUB_PREVIEW_URL=$GITHUB_PREVIEW_URL" >> $GITHUB_ENV
       - name: Generate Preview Link
         id: preview-link
-        run: echo "::set-output name=url::$GITHUB_PREVIEW_URL"
-        shell: bash
+        run: |
+          echo "Preview URL: $GITHUB_PREVIEW_URL"
       - name: Add the preview report to pull request
         uses: mshick/add-pr-comment@v2
         with:
           message: ${{ env.GITHUB_PREVIEW_URL }}
-          proxy-url: ${{ steps.preview-deployment.outputs.result }}
