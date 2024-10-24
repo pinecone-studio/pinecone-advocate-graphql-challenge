@@ -16,19 +16,15 @@ export const updateTask = async (
         taskName,
         priority,
         isDone,
-        updatedAt: new Date(), // Update the timestamp
+        updatedAt: new Date(), 
       },
-      { new: true } // Return the updated document
+      { new: true } 
     );
-
     if (!updatedTask) {
       throw new Error("Task not found");
     }
-
-    console.log("Updated task:", updatedTask);
-    return updatedTask; // Return the updated task
+    return updatedTask; 
   } catch (error) {
-    console.error(error); // Log the error for debugging
     throw new Error(`Failed to update task: `);
   }
 };
