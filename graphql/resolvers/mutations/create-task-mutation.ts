@@ -16,7 +16,7 @@ export const createTask = async (
     });
     return newTask;
   } catch (error) {
-    console.error("Error creating task:", error);
-    // throw new Error("Failed to create task");
+    // console.error("Error creating task:", error);
+    throw new Error("Failed to create task");
   }
 };

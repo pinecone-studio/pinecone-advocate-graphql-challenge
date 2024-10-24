@@ -1,7 +1,7 @@
 import { createTask } from "@/graphql/resolvers/mutations/create-task-mutation";
 
-jest.mock("../../graphql/models/task.schema.ts", () => ({
-  Task: {
+jest.mock("../../graphql/models/task.schema", () => ({
+  taskModel: {
     create: jest
       .fn()
       .mockResolvedValueOnce({
@@ -15,7 +15,7 @@ jest.mock("../../graphql/models/task.schema.ts", () => ({
   },
 }));
 
-describe("Add Task Mutation", () => {
+describe("Create Task Mutation", () => {
   it("Should call createTask mutation with taskName, IsDone and priority input successfully", async () => {
     const taskName = "Test Task";
     const isDone = false;
@@ -26,7 +26,7 @@ describe("Add Task Mutation", () => {
     expect(result.taskName).toEqual("hi");
   });
 
-  it("Should call addTask mutation with taskName and priority input with error", async () => {
+  it("Should call createTask mutation with taskName and priority input with error", async () => {
     const taskName = "Test Task";
     const isDone = false;
     const priority = 2;
