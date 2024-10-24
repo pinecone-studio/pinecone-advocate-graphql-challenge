@@ -15,9 +15,8 @@ export const createTask = async (
       priority,
     });
     return newTask;
-    // `This is hello Mutation ${taskName},${isDone},${priority}`;
   } catch (error) {
     console.error("Error creating task:", error);
-    throw new Error("Failed to create task");
+    // throw new Error("Failed to create task");
   }
 };
