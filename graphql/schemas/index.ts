@@ -2,7 +2,7 @@ import { gql } from "graphql-tag";
 
 export const typeDefs = gql`
   type Task {
-    _id: ID!
+    _id: String!
     taskName: String!
     isDone: Boolean!
     priority: Int!
@@ -16,7 +16,7 @@ export const typeDefs = gql`
   }
   type Mutation {
     sayHello(name: String!): String
-    createTask(taskName: String!, isDone: Boolean!, priority: Int!): Task
+    addTask(taskName: String!, priority: Int!): Task
     updateTask(
       _id: String!
       taskName: String!

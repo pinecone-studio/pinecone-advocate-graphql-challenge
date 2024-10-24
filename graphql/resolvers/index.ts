@@ -1,4 +1,4 @@
-import { createTask } from "./mutations/create-task-mutation";
+import { addTask } from "./mutations/create-task-mutation";
 import { sayHello } from "./mutations/say-hello";
 import { updateTask } from "./mutations/update-task-mutation";
 import { getAllFinishedTasks } from "./queries/getAll-finished-tasks-query";
@@ -13,7 +13,7 @@ export const resolvers = {
   },
   Mutation: {
     sayHello,
-    createTask,
+    addTask,
     updateTask,
   },
 };
