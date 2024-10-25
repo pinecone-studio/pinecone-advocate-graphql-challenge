@@ -4,21 +4,16 @@ export const updateTask = async (
   _: unknown,
   {
     _id,
-    taskName,
-    isDone,
-    priority,
-  }: { _id: string; taskName: string; isDone: boolean; priority: number }
+    task,
+  }: {
+    _id: string;
+    task: { taskName: string; isDone: boolean; priority: number };
+  }
 ) => {
   try {
-    const updatedTask = await taskModel.findByIdAndUpdate(
-      _id,
-      {
-        taskName,
-        isDone,
-        priority,
-      },
-      { new: true }
-    );
+    const updatedTask = await taskModel.findByIdAndUpdate(_id, task, {
+      new: true,
+    });
     return updatedTask;
   } catch (error) {
     console.error("Error creating task:", error);
