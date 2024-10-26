@@ -1,4 +1,4 @@
-import { taskModel } from "@/graphql/models/task.schema";
+import { taskModel } from "../../../graphql/models/task.schema";
 
 export const updateTask = async (
   _: unknown,
@@ -7,7 +7,7 @@ export const updateTask = async (
     taskName,
     priority,
     isDone,
-  }: { _id: string; taskName: string; priority: number; isDone: boolean }
+  }: { _id: string; taskName: string; priority: number; isDone?: boolean }
 ) => {
   try {
     const updatedTask = await taskModel.findByIdAndUpdate(
@@ -21,8 +21,11 @@ export const updateTask = async (
         new: true,
       }
     );
+    if (!updatedTask) {
+      throw new Error("Failed to update task");
+    }
     return updatedTask;
   } catch (error) {
-    return error;
+    throw new Error("Failed to update task");
   }
 };

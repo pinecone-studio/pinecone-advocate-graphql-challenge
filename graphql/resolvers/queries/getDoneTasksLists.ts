@@ -5,6 +5,6 @@ export const getDoneTasksLists = async () => {
     const doneTasks = await taskModel.find({ isDone: true });
     return doneTasks;
   } catch (error) {
-    return error;
+    throw new Error("Failed to retrieve done tasks");
   }
 };

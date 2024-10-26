@@ -6,7 +6,7 @@ export const addTask = async (
     taskName,
     priority,
     isDone,
-  }: { taskName: string; priority: number; isDone: boolean }
+  }: { taskName: string; priority: number; isDone?: boolean }
 ) => {
   try {
     const newTask = await taskModel.create({
@@ -16,6 +16,6 @@ export const addTask = async (
     });
     return newTask;
   } catch (error) {
-    return error;
+    throw new Error("Failed to add task");
   }
 };

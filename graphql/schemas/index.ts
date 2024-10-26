@@ -2,7 +2,7 @@ import { gql } from "graphql-tag";
 
 export const typeDefs = gql`
   type Task {
-    _id: String!
+    _id: ID!
     taskName: String!
     isDone: Boolean
     priority: Int!
@@ -20,7 +20,7 @@ export const typeDefs = gql`
     sayHello(name: String!): String
     addTask(taskName: String!, priority: Int!, isDone: Boolean): Task
     updateTask(
-      _id: String!
+      _id: ID!
       taskName: String!
       priority: Int!
       isDone: Boolean
