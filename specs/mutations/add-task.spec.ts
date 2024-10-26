@@ -1,4 +1,4 @@
-import { addTask } from "@/graphql/resolvers/mutations/create-task-mutation";
+import { addTask } from "@/graphql/resolvers/mutations/add-task";
 
 jest.mock("../../graphql/models/task.schema", () => ({
   taskModel: {

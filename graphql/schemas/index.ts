@@ -12,16 +12,17 @@ export const typeDefs = gql`
   type Query {
     helloQuery: String
     getAllTasks: [Task!]!
-    getAllFinishedTasks: [Task!]!
+    getDoneTasksLists: [Task!]!
   }
-  type updatedTaskPara {
-    taskName: String
-    isDone: Boolean
-    priority: Int
-  }
+
   type Mutation {
     sayHello(name: String!): String
     addTask(taskName: String!, priority: Int!): Task
-    updateTask(_id: ID!,updatedTaskPara): Task
+    updateTask(
+      taskId: ID!
+      taskName: String
+      isDone: Boolean
+      priority: Int
+    ): Task
   }
 `;

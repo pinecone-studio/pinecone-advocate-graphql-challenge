@@ -1,39 +1,61 @@
-import { addTask } from "@/graphql/resolvers/mutations/create-task-mutation";
 import { updateTask } from "@/graphql/resolvers/mutations/update-task-mutation";
+import { taskModel } from "@/graphql/models/task.schema";
 
 jest.mock("../../graphql/models/task.schema", () => ({
   taskModel: {
-    create: jest
-      .fn()
-      .mockResolvedValueOnce({
-        taskName: "hi",
-        priority: 1,
-        isDone: false,
-        createdAt: new Date(),
-        updatedAt: new Date(),
-      })
-      .mockRejectedValueOnce({}),
+    findByIdAndUpdate: jest.fn(),
   },
 }));
 
 describe("Update Task Mutation", () => {
-  it("Should call updateTask mutation with updated field successfully", async () => {
-    const taskName = "updated Taskname";
+  it("Should successfully update a task", async () => {
+    const taskId = "5678";
+    const taskName = "Updated Task";
     const priority = 2;
+    const isDone = false;
 
-    const result = await updateTask({}, { updated });
+    const mockUpdatedTask = {
+      _id: taskId,
+      taskName,
+      priority,
+      isDone,
+      updatedAt: new Date(),
+    };
 
-    expect(result.taskName).toEqual("hi");
+    (taskModel.findByIdAndUpdate as jest.Mock).mockResolvedValue(
+      mockUpdatedTask
+    );
+
+    const result = await updateTask({}, { taskId, taskName, priority, isDone });
+
+    expect(result).toEqual(mockUpdatedTask);
+    expect(taskModel.findByIdAndUpdate).toHaveBeenCalledWith(
+      taskId,
+      expect.objectContaining({
+        taskName,
+        priority,
+        isDone,
+        updatedAt: expect.any(Date),
+      }),
+      { new: true }
+    );
   });
 
-  it("Should call addTask mutation with taskName and priority input with error", async () => {
-    const taskName = "Test Task";
-    const priority = 2;
+  it("Should throw an error if task is not found", async () => {
+    const taskId = "nonexistent-id";
+    (taskModel.findByIdAndUpdate as jest.Mock).mockResolvedValue(null); // Mock to simulate task not found
 
-    try {
-      await updateTask({}, { taskName, priority });
-    } catch (error) {
-      expect(error).toEqual(new Error("Failed to add task"));
-    }
+    // Provide at least one field to ensure "No fields to update" is not triggered
+    await expect(
+      updateTask({}, { taskId, taskName: "New Task" })
+    ).rejects.toThrow("Task not found");
+  });
+
+  it("Should throw an error if no fields are provided to update", async () => {
+    const taskId = "5678";
+
+    await expect(updateTask({}, { taskId })).rejects.toThrow(
+      "No fields to update"
+    );
   });
 });
