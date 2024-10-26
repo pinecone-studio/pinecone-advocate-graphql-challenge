@@ -30,6 +30,5 @@ export const updateTask = async (
     if (error instanceof Error) {
       throw new Error(`Failed to update task: ${error.message}`);
     }
-    throw new Error("Failed to update task: An unknown error occurred");
   }
 };
