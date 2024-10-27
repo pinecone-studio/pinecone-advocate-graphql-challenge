@@ -11,7 +11,7 @@ beforeEach(() => {
   jest.clearAllMocks();
 });
 
-describe("Get Done Tasks Lists Query", () => {
+describe("Get Done Tasks List Query", () => {
   it("Should successfully retrieve all done taskS", async () => {
     const mockDoneTasks = [
       { _id: "1", taskName: "Completed Task 1", priority: 1, isDone: true },
