@@ -12,7 +12,7 @@ beforeEach(() => {
 });
 
 describe("Get Done Tasks List Query", () => {
-  it("Should successfully retrieve all done taskS", async () => {
+  it("Should successfully retrieve all done tasks", async () => {
     const mockDoneTasks = [
       { _id: "1", taskName: "Completed Task 1", priority: 1, isDone: true },
       { _id: "2", taskName: "Completed Task 2", priority: 2, isDone: true },
