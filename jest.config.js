@@ -14,7 +14,7 @@ const config = {
   rootDir: './',
   preset: "ts-jest",
   transform: {
-    "^.+\\.(ts|tsx|js|jsx)$": "ts-jest"
+    "^.+\\.(ts|tsx|js|jsx)$": "ts-jest",
   },
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx'],
   collectCoverage: true,
@@ -38,6 +38,9 @@ const config = {
       lines: 100,
       statements: 100,
     },
+  },
+  moduleNameMapper: {
+    '^@/(.*)$': '<rootDir>/$1', 
   },
 }
 
