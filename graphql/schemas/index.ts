@@ -10,7 +10,6 @@ export const typeDefs = gql`
     updated_at: String!
   }
   type Query {
-    helloQuery: [Task]
     getAllTasks: [Task]
     getDoneTasksLists: [Task]
   }
