@@ -11,4 +11,3 @@ generated.tsx
 coverage
 .swc/**/*
 .vercel
-.env
