@@ -1,6 +1,11 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
 
 :root {
   --foreground-rgb: 0, 0, 0;
@@ -18,16 +23,68 @@
 
 body {
   color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
 }
-
+.container {
+  width: 400px;
+  height: 600px;
+  border: 2px solid black;
+  margin: auto;
+  padding: 4px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.search {
+  padding: 8px;
+}
+.todoCard {
+  display: flex;
+  width: 100%;
+  height: fit-content;
+  gap: 10px;
+  border: 1px solid gray;
+  border-radius: 5px;
+  padding: 5px;
+}
+.timeShower {
+  display: flex;
+  gap: 2px;
+  font-size: 14px;
+}
+.inputStyle {
+  padding: 2px;
+}
 @layer utilities {
   .text-balance {
     text-wrap: balance;
+  }
+}
+/* 
+async function test() {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({
+          query: todoAddMutation,
+          variables: {
+            input: {
+              taskName: "Aygaa ugaah",
+              description: "Aygaa ugaahdaa hicheengui sain ugaagaarai",
+              priority: 2,
+            },
+          },
+        }),
+      });
+      const data = await res.json();
+      console.log("DATA=>", data);
+    }
+    test(); */
+@layer base {
+  :root {
+    --radius: 0.5rem;
   }
 }
