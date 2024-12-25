@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 
 export default function Home() {
   const [todos, setTodos] = useState([]);
+  const [todoAdded, setTodoAdded] = useState(false);
   useEffect(() => {
     async function test() {
       const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}`, {
@@ -25,7 +26,7 @@ export default function Home() {
       setTodos(data.getAllTasks);
     }
     test();
-  }, []);
+  }, [todoAdded]);
   return (
     <div className="container ">
       <h2
@@ -50,7 +51,7 @@ export default function Home() {
         </label>
         <button>Search</button>
       </div>
-      <AddTodoForm />
+      <AddTodoForm setTodoAdded={setTodoAdded} />
       <div className="flex flex-col">
         {todos.length > 0
           ? todos.map((todo: TTodo) => <TodoCard key={todo._id} todo={todo} />)

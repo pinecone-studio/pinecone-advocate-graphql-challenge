@@ -1,7 +1,11 @@
 import { todoAddMutation } from "@/lib/graphql/mutations/todo";
-import { ChangeEvent } from "react";
+import { ChangeEvent, Dispatch, SetStateAction } from "react";
 
-export const AddTodoForm = () => {
+export const AddTodoForm = ({
+  setTodoAdded,
+}: {
+  setTodoAdded: Dispatch<SetStateAction<boolean>>;
+}) => {
   const handleSubmit = async (e: ChangeEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
@@ -10,6 +14,7 @@ export const AddTodoForm = () => {
     const priority = Number(formData.get("priority"));
     if (Number(priority) <= 0) {
       alert("Priority should be greater than 0");
+      setTodoAdded((pre) => !pre);
       return;
     }
     const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}`, {
@@ -29,8 +34,9 @@ export const AddTodoForm = () => {
         },
       }),
     });
-    const data = await res.json();
-    console.log("data is:", data);
+    if (res.ok) {
+      alert("You have successfully added a task");
+    }
   };
   return (
     <form
