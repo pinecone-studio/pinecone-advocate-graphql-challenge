@@ -1,7 +1,11 @@
 import { todoAddMutation } from "@/lib/graphql/mutations/todo";
 import { ChangeEvent, Dispatch, SetStateAction } from "react";
 
-export const AddTodoForm = () => {
+export const AddTodoForm = ({
+  setTodoAdded,
+}: {
+  setTodoAdded: Dispatch<SetStateAction<boolean>>;
+}) => {
   const handleSubmit = async (e: ChangeEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
@@ -30,7 +34,8 @@ export const AddTodoForm = () => {
       }),
     });
     if (res.ok) {
-      alert("You have successfully added a task.Please refresh");
+      alert("You have successfully added a task.");
+      setTodoAdded((pre) => !pre);
     }
   };
   return (
