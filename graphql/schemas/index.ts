@@ -33,6 +33,7 @@ export const typeDefs = gql`
     getDoneTasks: [Todo]
     getAllTasks: [Todo]
     search(term: String!): [Todo]
+    getTaskByPriority(priority: String!): [Todo]
   }
 
   type Mutation {

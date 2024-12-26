@@ -6,6 +6,7 @@ import { getDoneTasks } from "./queries/get-done-tasks";
 import { helloQuery } from "./queries/hello-query";
 import { GraphQLScalarType, Kind } from "graphql";
 import { search } from "./queries/search";
+import { getTaskByPriority } from "./queries/get-tasks-by-priority";
 
 const dateScalar = new GraphQLScalarType({
   name: "Date",
@@ -38,6 +39,7 @@ export const resolvers = {
     getDoneTasks,
     getAllTasks,
     search,
+    getTaskByPriority,
   },
   Mutation: {
     sayHello,

@@ -41,5 +41,4 @@ updatedAt
 _id 
 }
 }
-
 `;
