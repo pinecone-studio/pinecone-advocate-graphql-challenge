@@ -24,7 +24,7 @@ export default function Home() {
       setTodos(data.getAllTasks);
     }
     test();
-  }, []);
+  }, [todoAdded]);
   return (
     <div className="container ">
       <h2
