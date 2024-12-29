@@ -32,8 +32,8 @@ export const todoSchema = new mongoose.Schema({
     default: new Date(),
   },
 });
-const TodoModel = mongoose.models.Todo || mongoose.model("Todo", todoSchema);
-export default TodoModel;
+export const TodoModel =
+  mongoose.models.Todo || mongoose.model("Todo", todoSchema);
 
 //addTask:
 

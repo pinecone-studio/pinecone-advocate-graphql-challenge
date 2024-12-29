@@ -1,4 +1,4 @@
-import { getTaskByPriority } from "@/graphql/resolvers/queries/get-tasks-by-priority";
+import { getDoneTasks } from "@/graphql/resolvers/queries/get-done-tasks";
 jest.mock("../../mongoose/model/todo", () => ({
   TodoModel: {
     find: jest.fn().mockResolvedValue([
@@ -6,7 +6,7 @@ jest.mock("../../mongoose/model/todo", () => ({
         _id: "1",
         taskName: "name",
         description: "des",
-        isDone: false,
+        isDone: true,
         priority: 2,
         tags: ["hiking"],
         createdAt: 34,
@@ -15,15 +15,15 @@ jest.mock("../../mongoose/model/todo", () => ({
     ]),
   },
 }));
-describe("Should update a task", () => {
-  it("update a task", async () => {
-    const tasks = await getTaskByPriority(null, { priority: "1" });
+describe("Should get done tasks", () => {
+  it("get done  tasks", async () => {
+    const tasks = await getDoneTasks();
     expect(tasks).toEqual([
       {
         _id: "1",
         taskName: "name",
         description: "des",
-        isDone: false,
+        isDone: true,
         priority: 2,
         tags: ["hiking"],
         createdAt: 34,
