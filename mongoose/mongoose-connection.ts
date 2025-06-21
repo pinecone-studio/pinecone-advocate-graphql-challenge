@@ -1,11 +1,16 @@
 import mongoose from "mongoose";
 
 export const connectMongoose = async () => {
+  if (mongoose.connection.readyState === 1) {
+    console.log("MongoDB already connected");
+    return;
+  }
+
   try {
     await mongoose.connect(process.env.MONGODB_URL as string);
-    console.log("connection successful");
+    console.log("Connection successful");
   } catch (error) {
-    console.log("Mongoose connection error", error);
-    console.log("connection Failed");
+    console.error("Mongoose connection error:", error);
+    console.log("Connection failed");
   }
 };
