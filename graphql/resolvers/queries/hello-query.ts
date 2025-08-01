@@ -1,3 +1,3 @@
 export const helloQuery = () => {
-  return "This is hello Query";
+  return "This is hello Query, mee";
 };
