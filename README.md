@@ -64,6 +64,7 @@ In this challenge, you'll need to implement the following GraphQL operations:
     - `updatedAt` (Date)
     - `_id` (MongoDB Object Id)
     - `userId` (String) → required (owner of the task)
+
   - **Validation**:
     - `taskName` must be unique per user
     - `description` cannot be the same as taskName
@@ -82,7 +83,6 @@ In this challenge, you'll need to implement the following GraphQL operations:
     - `isDone` (Boolean)
     - `tags` (Array of Strings) => append or remove tags
 
-
 ### 2. **Queries**:
 
 - **`getUserDoneTasksLists`**:
@@ -94,7 +94,6 @@ In this challenge, you'll need to implement the following GraphQL operations:
   - ✅ If the user exists, return all tasks where:
     - userId matches the provided ID
     - isDone is true
-
 
 ## ⚙️ Command Instructions
 
