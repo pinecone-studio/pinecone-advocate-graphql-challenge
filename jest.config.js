@@ -1,36 +1,31 @@
-// import type { Config } from 'jest'
-const nextJest = require('next/jest')
-const defaults = require('jest-config')
+const nextJest = require("next/jest");
 
 const createJestConfig = nextJest({
-  // Provide the path to your Next.js app to load next.config.js and .env files in your test environment
-  dir: './',
-})
+  dir: "./",
+});
 
-// Add any custom config to be passed to Jest
-const config = {
-  moduleDirectories: ['node_modules', '<rootDir>/'],
-  testEnvironment: 'node',
-  rootDir: './',
+const customJestConfig = {
   preset: "ts-jest",
-  transform: {
-    "^.+\\.(ts|tsx|js|jsx)$": "ts-jest"
+  testEnvironment: "node",
+  moduleNameMapper: {
+    "^@/(.*)$": "<rootDir>/$1",
   },
-  moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx'],
+  transform: {
+    "^.+\\.(ts|tsx)$": "ts-jest",
+  },
+  testMatch: ["<rootDir>/specs/**/*.spec.ts", "<rootDir>/specs/**/*.test.ts"],
   collectCoverage: true,
   collectCoverageFrom: [
-    '!**/*.{js,jsx,ts,tsx}',
-    '**/graphql/resolvers/**/*.{js,jsx,ts,tsx}',
-    '!**/components/ui/*.{js,jsx,ts,tsx}',
-    '!**/node_modules/**',
-    '!**/.next/**',
-    '!**/out/**',
-    '!**/*.d.ts',
-    '!**/graphql/resolvers/index.ts',
+    "**/graphql/resolvers/**/*.{ts,tsx}",
+    "!**/components/ui/**",
+    "!**/node_modules/**",
+    "!**/.next/**",
+    "!**/out/**",
+    "!**/*.d.ts",
+    "!**/graphql/resolvers/index.ts",
   ],
-  testMatch: ['<rootDir>/specs/**/*.(test|spec).{js,jsx,ts,tsx}'],
-  coverageDirectory: '<rootDir>/coverage',
-  coverageReporters: ['text', 'lcov', 'json', 'html'],
+  coverageDirectory: "<rootDir>/coverage",
+  coverageReporters: ["text", "lcov", "json", "html"],
   coverageThreshold: {
     global: {
       branches: 100,
@@ -39,6 +34,6 @@ const config = {
       statements: 100,
     },
   },
-}
+};
 
-module.exports = createJestConfig(config)
+module.exports = createJestConfig(customJestConfig);
