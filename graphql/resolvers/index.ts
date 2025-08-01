@@ -1,11 +1,15 @@
-import { sayHello } from "./mutations/say-hello";
-import { helloQuery } from "./queries/hello-query";
+import { addTaskInput } from "./mutations/add-tasks";
+import { updateTaskInput } from "./mutations/update-tasks";
+import { getAllTasks } from "./queries/get-all-tasks";
+import { getFinishedTasksLists } from "./queries/get-finished-tasks-lists";
 
 export const resolvers = {
   Query: {
-    helloQuery,
+    getAllTasks,
+    getFinishedTasksLists,
   },
   Mutation: {
-    sayHello,
+    addTaskInput,
+    updateTaskInput,
   },
 };
