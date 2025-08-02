@@ -51,10 +51,8 @@ In this challenge, you'll need to implement the following GraphQL operations:
 ### 1. **Mutations**:
 
 - **`addTask`**:
-
   - This mutation creates a new todo task.
   - **Required fields**:
-
     - `taskName` (String) => required
     - `description` (String) => required ( must be at least 10 characters long )
     - `isDone` (Boolean) => default to `false`
@@ -64,6 +62,7 @@ In this challenge, you'll need to implement the following GraphQL operations:
     - `updatedAt` (Date)
     - `_id` (MongoDB Object Id)
     - `userId` (String) → required (owner of the task)
+
   - **Validation**:
     - `taskName` must be unique per user
     - `description` cannot be the same as taskName
@@ -82,11 +81,9 @@ In this challenge, you'll need to implement the following GraphQL operations:
     - `isDone` (Boolean)
     - `tags` (Array of Strings) => append or remove tags
 
-
 ### 2. **Queries**:
 
 - **`getUserDoneTasksLists`**:
-
   - This query retrieves all tasks that have been marked as done by the specified user.
   - **Required arguments**:
     - userId (String) – the ID of the user whose completed tasks you want to retrieve.
@@ -94,7 +91,6 @@ In this challenge, you'll need to implement the following GraphQL operations:
   - ✅ If the user exists, return all tasks where:
     - userId matches the provided ID
     - isDone is true
-
 
 ## ⚙️ Command Instructions
 

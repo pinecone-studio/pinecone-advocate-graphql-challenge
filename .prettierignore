@@ -1,0 +1,9 @@
+node_modules
+.next
+coverage
+generated
+*.min.js
+*.min.css
+yarn.lock
+package-lock.json
+.git 
